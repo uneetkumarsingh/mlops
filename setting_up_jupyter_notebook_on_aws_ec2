@@ -1,0 +1,29 @@
+Install Anaconda on EC2:
+wget https://repo.anaconda.com/archive/Anaconda3-2022.10-Linux-x86_64.sh
+bash Anaconda3-2022.10-Linux-x86_64.sh
+
+    If you'd prefer that conda's base environment not be activated on startup, 
+       set the auto_activate_base parameter to false: 
+
+    conda config --set auto_activate_base false
+
+    Thank you for installing Anaconda3!
+    
+Start Jupyter instance on EC2 server
+For this either you can use cloudshell/instant connect or ssh into ec2 with:
+>> ssh -i "my_mac_machine.pem" ubuntu@ec2-15-207-110-3.ap-south-1.compute.amazonaws.com
+and then start jupyter like this:
+>> jupyter notebook --no-browser --port=8888
+ no-browser so that it doesn't throw javascript not available errors. 
+ Now you will have sometime like:
+ http://localhost:8888/?token=2a4a5f6daa8346c2ce774fa82c2cf9290f5ab0e5e6703427
+
+Now we need to SSH to this 8888 port on EC2(bind to that port). to do that.
+>> ssh -i "my_mac_machine.pem" -L 8000:localhost:8888 ubuntu@ec2-15-207-110-3.ap-south-1.compute.amazonaws.com
+
+Here i is identification method, -L local/ 8000 of local laptop is bound to localhost:8888 of EC2. 
+
+Once that is done: 
+Open http://localhost:8000/?token=2a4a5f6daa8346c2ce774fa82c2cf9290f5ab0e5e6703427
+
+Reference: 
